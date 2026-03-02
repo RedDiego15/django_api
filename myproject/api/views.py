@@ -2,6 +2,12 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-@api_view(["GET"])
-def studentsView(request):
-    return Response({"message": "Students view from api"})
+from students.models import Student
+
+from rest_framework import viewsets
+from students.models import Student
+from students.serializer import StudentSerializer
+
+class StudentViewSet(viewsets.ModelViewSet):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
